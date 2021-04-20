@@ -53,10 +53,14 @@ class UserFinder extends Component {
           />
         </div>
         <ErrorBoundary>
-          <Users
-            users={this.state.filteredUsers}
-            toggleUsers={this.inputDisableHandler}
-          />
+          {this.state.filteredUsers.length === 0 ? (
+            <p style={{ textAlign: "center" }}>No matching users.</p>
+          ) : (
+            <Users
+              users={this.state.filteredUsers}
+              toggleUsers={this.inputDisableHandler}
+            />
+          )}
         </ErrorBoundary>
       </Fragment>
     );
