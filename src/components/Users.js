@@ -6,7 +6,7 @@ import classes from "./Users.module.css";
 class Users extends Component {
   constructor() {
     super();
-    this.state = { showUsers: false };
+    this.state = { showUsers: true };
   }
 
   // state = { showUsers: false };
@@ -23,6 +23,7 @@ class Users extends Component {
     this.setState(prevState => {
       return { showUsers: !prevState.showUsers };
     });
+    this.props.toggleUsers();
   };
 
   render() {
