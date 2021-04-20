@@ -11,10 +11,11 @@ class Users extends Component {
 
   // state = { showUsers: false };
   componentDidMount() {
-    console.log("component Users mounted");
+    //
   }
-  componentDidUpdate() {
-    console.log("component Users updated");
+  componentDidUpdate(prevProps) {
+    if (prevProps.users.length === this.props.users.length) return;
+    // if (this.props.users.length === 0) throw new Error("No users provided!");
   }
   componentWillUnmount() {
     console.log("component Users will unmount");
@@ -27,14 +28,12 @@ class Users extends Component {
   };
 
   render() {
-    const usersList = this.props.users.length ? (
+    const usersList = (
       <ul>
         {this.props.users.map(user => (
           <User key={user.id} name={user.name} />
         ))}
       </ul>
-    ) : (
-      <p>No matching user.</p>
     );
     return (
       <div className={classes.users}>

@@ -2,6 +2,7 @@ import { Fragment, Component } from "react";
 import UsersContext from "../Store/users-context";
 import Users from "./Users";
 import classes from "./UserFinder.module.css";
+import ErrorBoundary from "./ErrorBoundary";
 
 class UserFinder extends Component {
   static contextType = UsersContext;
@@ -51,10 +52,12 @@ class UserFinder extends Component {
             placeholder="Search"
           />
         </div>
-        <Users
-          users={this.state.filteredUsers}
-          toggleUsers={this.inputDisableHandler}
-        />
+        <ErrorBoundary>
+          <Users
+            users={this.state.filteredUsers}
+            toggleUsers={this.inputDisableHandler}
+          />
+        </ErrorBoundary>
       </Fragment>
     );
   }
