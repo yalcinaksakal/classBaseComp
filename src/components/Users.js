@@ -26,12 +26,14 @@ class Users extends Component {
   };
 
   render() {
-    const usersList = (
+    const usersList = this.props.users.length ? (
       <ul>
         {this.props.users.map(user => (
           <User key={user.id} name={user.name} />
         ))}
       </ul>
+    ) : (
+      <p>No matching user.</p>
     );
     return (
       <div className={classes.users}>
