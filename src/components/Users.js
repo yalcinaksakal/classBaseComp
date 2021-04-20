@@ -1,37 +1,44 @@
-import { Component, useState } from "react";
+import { Component } from "react";
 import User from "./User";
 
 import classes from "./Users.module.css";
 
-const DUMMY_USERS = [
-  { id: "u1", name: "aghia" },
-  { id: "u2", name: "julie" },
-  { id: "u3", name: "jane" },
-];
-
 class Users extends Component {
-  // const [showUsers, setShowUsers] = useState(true);
+  constructor() {
+    super();
+    this.state = { showUsers: false };
+  }
 
-  state:{}
-
+  // state = { showUsers: false };
+  componentDidMount() {
+    console.log("component Users mounted");
+  }
+  componentDidUpdate() {
+    console.log("component Users updated");
+  }
+  componentWillUnmount() {
+    console.log("component Users will unmount");
+  }
   toggleUsersHandler = () => {
-    this.setState(curState => !curState);
+    this.setState(prevState => {
+      return { showUsers: !prevState.showUsers };
+    });
   };
 
-  usersList = (
-    <ul>
-      {DUMMY_USERS.map(user => (
-        <User key={user.id} name={user.name} />
-      ))}
-    </ul>
-  );
   render() {
+    const usersList = (
+      <ul>
+        {this.props.users.map(user => (
+          <User key={user.id} name={user.name} />
+        ))}
+      </ul>
+    );
     return (
       <div className={classes.users}>
-        <button onClick={toggleUsersHandler}>
-          {showUsers ? "Hide" : "Show"} Users
+        <button onClick={this.toggleUsersHandler}>
+          {this.state.showUsers ? "Hide" : "Show"} Users
         </button>
-        {showUsers && usersList}
+        {this.state.showUsers && usersList}
       </div>
     );
   }
