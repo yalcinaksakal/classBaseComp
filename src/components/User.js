@@ -4,10 +4,10 @@ import classes from "./User.module.css";
 
 class User extends Component {
   componentDidMount() {
-    console.log("component User mounted");
+    // console.log("component User mounted");
   }
   componentDidUpdate() {
-    console.log("component User updated");
+    // console.log("component User updated");
   }
   componentWillUnmount() {
     console.log("component User will unmount");

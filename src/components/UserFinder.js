@@ -1,26 +1,21 @@
 import { Fragment, Component } from "react";
-
+import UsersContext from "../Store/users-context";
 import Users from "./Users";
 import classes from "./UserFinder.module.css";
 
-const DUMMY_USERS = [
-  { id: "u1", name: "aghia" },
-  { id: "u2", name: "julie" },
-  { id: "u3", name: "jane" },
-  { id: "u4", name: "aga" },
-  { id: "u5", name: "julia" },
-  { id: "u6", name: "janet" },
-];
-
 class UserFinder extends Component {
-  //   static contextType = UsersContext;
+  static contextType = UsersContext;
 
   constructor() {
     super();
     this.state = {
-      filteredUsers: DUMMY_USERS,
+      filteredUsers: [],
       searchTerm: "",
     };
+  }
+
+  componentDidMount() {
+    this.setState({ filteredUsers: this.context.users });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -28,7 +23,7 @@ class UserFinder extends Component {
     if (prevState.searchTerm === this.state.searchTerm) return;
 
     this.setState({
-      filteredUsers: DUMMY_USERS.filter(user =>
+      filteredUsers: this.context.users.filter(user =>
         user.name.includes(this.state.searchTerm)
       ),
     });
@@ -41,7 +36,11 @@ class UserFinder extends Component {
     return (
       <Fragment>
         <div className={classes.finder}>
-          <input type="search" onChange={this.searchChangeHandler.bind(this)} />
+          <input
+            type="search"
+            onChange={this.searchChangeHandler.bind(this)}
+            placeholder="Search"
+          />
         </div>
         <Users users={this.state.filteredUsers} />
       </Fragment>
